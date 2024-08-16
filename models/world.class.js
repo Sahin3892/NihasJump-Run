@@ -37,14 +37,13 @@ class World {
         this.addObjectsToMap(this.enemies);
 
 
-        // Junus/DA Fragen
+        // Die selbe Funktion kürzer geschrieben
         // requestAnimationFrame(this.draw.bind(this));
         let self = this
         requestAnimationFrame(function () {
             self.draw();
         });
-
-
+        
     }
 
     addObjectsToMap(objects){
