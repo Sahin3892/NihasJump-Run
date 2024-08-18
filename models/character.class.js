@@ -12,6 +12,9 @@ class Character extends MovableObject {
         'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Walk/walk6.png'
     ];
     world;
+    walking_sound = new Audio('src/audio/step.mp3');
+
+
 
     constructor() {
         super().loadImage('src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/mage.png');
@@ -23,15 +26,19 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.x += this.speed;
                 this.otherDirection = false;
+                this.walking_sound.play();
+                this.walking_sound.volume = 0.2;
             }
-            if (this.world.keyboard.LEFT) {
+            if (this.world.keyboard.LEFT && this.x > 0) {
                 this.x -= this.speed;
                 this.otherDirection = true;
+                this.walking_sound.play();
+                this.walking_sound.volume = 0.2;
             }
-            this.world.camera_x = -this.x;
+            this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
         setInterval(() => {

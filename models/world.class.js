@@ -1,54 +1,12 @@
 class World {
     character = new Character();
-    enemies = [new Goblin(), new Goblin(), new Goblin()];
-    clouds = [new Cloud()];
-    backgroundObjects =
-        [
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/sky.png', -719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds1.png', -719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds2.png', -719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds3.png', -719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks.png', -719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks2.png', -719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks3.png', -719),
-
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/sky.png', 0),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds1.png', 0),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds2.png', 0),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds3.png', 0),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks.png', 0),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks2.png', 0),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks3.png', 0),
-
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/sky.png', 719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds1.png', 719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds2.png', 719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds3.png', 719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks.png', 719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks2.png', 719),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks3.png', 719),
-
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/sky.png', 719*2),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds1.png', 719*2),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds2.png', 719*2),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds3.png', 719*2),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks.png', 719*2),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks2.png', 719*2),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks3.png', 719*2),
-
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/sky.png', 719*3),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds1.png', 719*3),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds2.png', 719*3),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/clouds3.png', 719*3),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks.png', 719*3),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks2.png', 719*3),
-            new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/rocks3.png', 719*3)
-        ];
-
+    level = level1;
+    backgroundObjects = new BackgroundObject();
     canvas;
     ctx;
     keyboard;
     camera_x = 19;
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -67,10 +25,10 @@ class World {
 
         this.ctx.translate(this.camera_x, 0);
 
-        this.addObjectsToMap(this.backgroundObjects);
-        this.addObjectsToMap(this.clouds);
+        this.addObjectsToMap(this.level.backgroundObject);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.enemies);
 
         this.ctx.translate(-this.camera_x, 0);
 

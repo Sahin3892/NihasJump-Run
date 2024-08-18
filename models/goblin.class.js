@@ -10,6 +10,7 @@ class Goblin extends MovableObject {
         'src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/walk5.png',
         'src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/walk6.png'
     ];
+    goblin_sound = new Audio('src/audio/orcgaunt1.mp3');
 
 
     constructor() {
@@ -27,7 +28,12 @@ class Goblin extends MovableObject {
             let i = this.currentImage % this.IMAGES_WALKING.length;
             let path = this.IMAGES_WALKING[i];
             this.img = this.imageCache[path];
-            this.currentImage++;
+            this.currentImage++
         }, 300);
+        setInterval(() => {
+            this.goblin_sound.play();
+            this.goblin_sound.volume = 0.1;
+        },2000);
+
     }
 }
