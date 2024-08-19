@@ -1,11 +1,11 @@
 class World {
     character = new Character();
     level = level1;
-    backgroundObjects = new BackgroundObject();
     canvas;
     ctx;
     keyboard;
     camera_x = 19;
+    otherDirection = false;
 
 
     constructor(canvas, keyboard) {
@@ -26,8 +26,10 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObject);
+
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+
         this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -52,13 +54,15 @@ class World {
             this.ctx.scale(-1, 1);
             mo.x = mo.x * -1;
         }
-
+      //  try {
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+      //  } catch (e) {
+      //      console.warn('Error loading image',e);
+       // }
         if (mo.otherDirection) {
             mo.x = mo.x * -1;
             this.ctx.restore();
         }
     }
-
 
 }

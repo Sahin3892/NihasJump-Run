@@ -6,5 +6,9 @@ class Keyboard {
     SPACE = false;
 
     constructor() {
+
+
     }
+
+
 }

@@ -1,7 +1,11 @@
 const level1 = new Level(
-    [new Goblin(), new Goblin(), new Goblin()], new Endboss(),
+    [
+        new Goblin(), new Goblin(), new Goblin(), new Endboss()
+    ],
 
-    [new Cloud(-719), new Cloud(0), new Cloud(719), new Cloud(719 * 2), new Cloud(719 * 3)],
+    [
+        new Cloud(-719), new Cloud(0), new Cloud(719), new Cloud(719 * 2), new Cloud(719 * 3)
+    ],
 
     [
         new BackgroundObject('src/img/mountain-platformer-pixel-art-tileset/PNG/Background/bright/sky.png', -719),
