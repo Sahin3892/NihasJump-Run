@@ -8,6 +8,7 @@ class World {
     otherDirection = false;
 
 
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -38,7 +39,6 @@ class World {
         requestAnimationFrame(function () {
             self.draw();
         });
-
     }
 
     addObjectsToMap(objects) {
@@ -54,11 +54,9 @@ class World {
             this.ctx.scale(-1, 1);
             mo.x = mo.x * -1;
         }
-      //  try {
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-      //  } catch (e) {
-      //      console.warn('Error loading image',e);
-       // }
+
+            this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+
         if (mo.otherDirection) {
             mo.x = mo.x * -1;
             this.ctx.restore();

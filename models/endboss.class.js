@@ -1,7 +1,7 @@
 class Endboss extends MovableObject {
     height = 300;
     width = 300;
-    y =200;
+    y = 200;
 
     IMAGES_WALKING = [
         'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png',
@@ -12,7 +12,7 @@ class Endboss extends MovableObject {
     ];
 
     constructor() {
-        super().loadImage(this.IMAGES_WALKING);
+        super().loadImages(this.IMAGES_WALKING);
         this.x = 700;
         this.animate();
     }
@@ -22,5 +22,4 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
     }
-
 }
