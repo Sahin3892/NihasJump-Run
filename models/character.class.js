@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-    y = 300
+    y = 100; //300 Standart
     height = 150;
     width = 150;
     speed = 3.5;
@@ -19,7 +19,7 @@ class Character extends MovableObject {
     constructor() {
         super().loadImage('src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/mage.png');
         this.loadImages(this.IMAGES_WALKING);
-
+        this.applyGravity();
         this.animate();
     }
 

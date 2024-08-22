@@ -8,7 +8,6 @@ class World {
     otherDirection = false;
 
 
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -55,7 +54,7 @@ class World {
             mo.x = mo.x * -1;
         }
 
-            this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
 
         if (mo.otherDirection) {
             mo.x = mo.x * -1;
