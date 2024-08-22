@@ -23,14 +23,17 @@ class Goblin extends MovableObject {
     }
 
     animate() {
-        this.moveLeft();
+        setInterval(() => {
+            this.moveLeft();
+            this.otherDirection = false;
+        }, 1000 / 60);
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 300);
         setInterval(() => {
             this.goblin_sound.play();
-            this.goblin_sound.volume = 0.1;
-        },2000);
+            this.goblin_sound.volume = 0.05;
+        }, 4000);
 
     }
 }
