@@ -25,7 +25,7 @@ class Character extends MovableObject {
     offset = {
         top: 50,
         left: 50,
-        right: 100,
+        right: 110,
         bottom: 70
     };
 
