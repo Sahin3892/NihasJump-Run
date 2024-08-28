@@ -23,7 +23,7 @@ class Goblin extends MovableObject {
         super().loadImage('src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/0goblin.png');
         this.loadImages(this.IMAGES_WALKING);
 
-        this.x = 300 + Math.random() * 500;
+        this.x = 300 + Math.random() * 1500;
         this.speed = 0.15 + Math.random() * 0.25;
         this.animate();
     }

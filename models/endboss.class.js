@@ -10,6 +10,12 @@ class Endboss extends MovableObject {
         'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger4.png',
         'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger5.png'
     ];
+    offset = {
+        top: 150, // Y
+        left: 275, // X
+        right: 360, // width
+        bottom: 295 // height
+    };
 
     constructor() {
         super().loadImage('src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png');

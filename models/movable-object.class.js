@@ -48,7 +48,7 @@ class MovableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Goblin) {
+        if (this instanceof Character || this instanceof Goblin || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'blue';
