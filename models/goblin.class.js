@@ -11,6 +11,12 @@ class Goblin extends MovableObject {
         'src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/walk6.png'
     ];
     goblin_sound = new Audio('src/audio/orcgaunt1.mp3');
+        offset = {
+        top: 50,
+        left: 50,
+        right: 100,
+        bottom: 100
+    };
 
 
     constructor() {

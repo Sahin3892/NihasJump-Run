@@ -22,7 +22,12 @@ class Character extends MovableObject {
     ];
     world;
     walking_sound = new Audio('src/audio/step.mp3');
-
+    offset = {
+        top: 50,
+        left: 50,
+        right: 100,
+        bottom: 70
+    };
 
     constructor() {
         super().loadImage('src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/mage.png');
@@ -46,7 +51,7 @@ class Character extends MovableObject {
                 this.otherDirection = true;
                 this.soundSettings();
             }
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            if (this.world.keyboard.SPACE && !this.isAboveGround() || this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;

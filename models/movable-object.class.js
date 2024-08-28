@@ -10,6 +10,12 @@ class MovableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 1;
+    offset = {
+        top: 0, // Y
+        left: 0, // X
+        right: 0, // width
+        bottom: 0 // height
+    };
 
     applyGravity() {
         setInterval(() => {
@@ -22,6 +28,14 @@ class MovableObject {
 
     isAboveGround() {
         return this.y < 300;
+    }
+
+
+    isColliding(mo) {
+        return this.x + this.width > mo.x + mo.offset.left &&
+            this.y + this.height > mo.y + mo.offset.top &&
+            this.x < mo.x + mo.width - mo.offset.right &&
+            this.y < mo.y + mo.height - mo.offset.bottom
     }
 
     loadImage(path) {
@@ -39,6 +53,12 @@ class MovableObject {
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'blue';
             ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
             ctx.stroke();
         }
     }
