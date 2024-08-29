@@ -32,10 +32,10 @@ class MovableObject {
 
 
     isColliding(mo) {
-        return this.x + this.width > mo.x + mo.offset.left &&
-            this.y + this.height > mo.y + mo.offset.top &&
-            this.x < mo.x + mo.width - mo.offset.right &&
-            this.y < mo.y + mo.height - mo.offset.bottom
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+            this.y - this.offset.top < mo.y + mo.height - mo.offset.bottom
     }
 
     loadImage(path) {
@@ -58,7 +58,7 @@ class MovableObject {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'red';
-            ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
+            ctx.rect(this.x + this.offset.left, this.y + this.offset.top, (this.x + this.width - this.offset.right) - (this.x + this.offset.left), (this.y + this.height - this.offset.bottom) - (this.y + this.offset.top));
             ctx.stroke();
         }
     }
@@ -88,6 +88,6 @@ class MovableObject {
     }
 
     jump() {
-        this.speedY = 18;
+        this.speedY = 22;
     }
 }
