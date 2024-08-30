@@ -22,10 +22,11 @@ class Character extends MovableObject {
     ];
     world;
     walking_sound = new Audio('src/audio/step.mp3');
+    jumping_sound = new Audio('src/audio/jump.mp3');
     offset = {
         top: 60,
-        left: 20,
-        right: 60,
+        left: 45,
+        right: 45,
         bottom: 15
     };
 
@@ -53,6 +54,7 @@ class Character extends MovableObject {
             }
             if (this.world.keyboard.SPACE && !this.isAboveGround() || this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
+                this.jumping_sound.play();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
