@@ -20,6 +20,23 @@ class Character extends MovableObject {
         'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Jump/jump6.png',
         'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Jump/jump7.png',
     ];
+    IMAGES_DEAD = [
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Death/death1.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Death/death2.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Death/death3.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Death/death4.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Death/death5.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Death/death6.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Death/death7.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Death/death8.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Death/death9.png'
+    ];
+    IMAGES_HURT = [
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Hurt/hurt1.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Hurt/hurt2.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Hurt/hurt3.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Hurt/hurt4.png'
+    ];
     world;
     walking_sound = new Audio('src/audio/step.mp3');
     jumping_sound = new Audio('src/audio/jump.mp3');
@@ -30,10 +47,13 @@ class Character extends MovableObject {
         bottom: 15
     };
 
+
     constructor() {
         super().loadImage('src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/mage.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_HURT);
         this.applyGravity();
         this.animate();
         this.soundSettings();
@@ -60,10 +80,14 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.isAboveGround()) {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+            } else if
+            (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
-
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGES_WALKING);
                 } else {
