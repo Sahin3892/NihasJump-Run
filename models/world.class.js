@@ -6,6 +6,7 @@ class World {
     keyboard;
     camera_x = 19;
     otherDirection = false;
+    statusBarHealth = new Statusbarhealth();
 
 
     constructor(canvas, keyboard) {
@@ -22,15 +23,15 @@ class World {
     }
 
     checkCollisions() {
-            setInterval(() => {
-                this.level.enemies.forEach((enemy) =>{
-                    if(this.character.isColliding(enemy)) {
-                        console.log('Colliding with Enemy', enemy);
-                        this.character.hit();
-                        console.log('Collision with Character, energy', this.character.energy);
-                    }
-                });
-            }, 200);
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    console.log('Colliding with Enemy', enemy);
+                    this.character.hit();
+                    console.log('Collision with Character, energy', this.character.energy);
+                }
+            });
+        }, 200);
     }
 
     draw() {
@@ -43,6 +44,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
 
+        this.addToMap(this.statusBarHealth);
         this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);
