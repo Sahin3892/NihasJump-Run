@@ -28,7 +28,7 @@ class World {
                 if (this.character.isColliding(enemy)) {
                     console.log('Colliding with Enemy', enemy);
                     this.character.hit();
-                    console.log('Collision with Character, energy', this.character.energy);
+                    this.statusBarHealth.setPercentage(this.character.energy);
                 }
             });
         }, 200);
@@ -38,14 +38,16 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.backgroundObject);
 
+        this.ctx.translate(-this.camera_x, 0);
+        // ------ Space for fixed Objects ------
+        this.addToMap(this.statusBarHealth);
+        this.ctx.translate(this.camera_x, 0); // Forwards
+
+        this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
-
-        this.addToMap(this.statusBarHealth);
-        this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);
 
