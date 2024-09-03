@@ -6,9 +6,10 @@ class World {
     keyboard;
     camera_x = 19;
     otherDirection = false;
-    statusBarBoarder = new Statusbarboarder();
+    statusBarBoarder = new StatusbarBoarder();
     statusBarHealth = new Statusbarhealth();
-    statusBarIcon = new Statusbaricon();
+    statusBarIcon = new StatusbarIcon();
+    statusBarMana = new StatusbarMana();
 
 
     constructor(canvas, keyboard) {
@@ -47,6 +48,7 @@ class World {
         this.addToMap(this.statusBarBoarder);
         this.addToMap(this.statusBarIcon);
         this.addToMap(this.statusBarHealth);
+        this.addToMap(this.statusBarMana);
         this.ctx.translate(this.camera_x, 0); // Forwards
 
         this.addToMap(this.character);

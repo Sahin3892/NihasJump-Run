@@ -1,4 +1,4 @@
-class Statusbarboarder extends DrawableObject {
+class StatusbarBoarder extends DrawableObject {
 
     imageIcon = ('src/img/AVAS/ava2.png');
 

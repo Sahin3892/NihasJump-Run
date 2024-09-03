@@ -1,4 +1,4 @@
-class Statusbaricon extends DrawableObject {
+class StatusbarIcon extends DrawableObject {
 
     constructor() {
         super();
