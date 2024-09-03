@@ -8,6 +8,7 @@ class World {
     otherDirection = false;
     statusBarBoarder = new Statusbarboarder();
     statusBarHealth = new Statusbarhealth();
+    statusBarIcon = new Statusbaricon();
 
 
     constructor(canvas, keyboard) {
@@ -44,6 +45,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         // ------ Space for fixed Objects ------
         this.addToMap(this.statusBarBoarder);
+        this.addToMap(this.statusBarIcon);
         this.addToMap(this.statusBarHealth);
         this.ctx.translate(this.camera_x, 0); // Forwards
 
