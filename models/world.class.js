@@ -6,6 +6,7 @@ class World {
     keyboard;
     camera_x = 19;
     otherDirection = false;
+    statusBarBoarder = new Statusbarboarder();
     statusBarHealth = new Statusbarhealth();
 
 
@@ -42,6 +43,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
         // ------ Space for fixed Objects ------
+        this.addToMap(this.statusBarBoarder);
         this.addToMap(this.statusBarHealth);
         this.ctx.translate(this.camera_x, 0); // Forwards
 
