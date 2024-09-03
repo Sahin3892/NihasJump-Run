@@ -37,6 +37,15 @@ class Character extends MovableObject {
         'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Hurt/hurt3.png',
         'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Hurt/hurt4.png'
     ];
+    IMAGES_CAST = [
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Attack/attack1.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Attack/attack2.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Attack/attack3.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Attack/attack4.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Attack/attack5.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Attack/attack6.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Attack/attack7.png'
+    ];
     world;
     walking_sound = new Audio('src/audio/step.mp3');
     jumping_sound = new Audio('src/audio/jump.mp3');
@@ -54,6 +63,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_CAST);
         this.applyGravity();
         this.animate();
         this.soundSettings();
@@ -76,6 +86,7 @@ class Character extends MovableObject {
                 this.jump();
                 this.jumping_sound.play();
             }
+
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
@@ -87,6 +98,8 @@ class Character extends MovableObject {
             } else if
             (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
+            } else if (this.world.keyboard.F) {
+                this.playAnimation(this.IMAGES_CAST);
             } else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGES_WALKING);
@@ -96,6 +109,7 @@ class Character extends MovableObject {
             }
         }, 50);
     }
+
 
     soundSettings() {
         this.walking_sound.play();

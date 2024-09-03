@@ -23,7 +23,11 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        return this.y < 300;
+        if (this instanceof CastingSpell) {
+            return true;
+        } else {
+            return this.y < 300;
+        }
     }
 
     isColliding(mo) {

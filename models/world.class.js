@@ -10,6 +10,7 @@ class World {
     statusBarHealth = new Statusbarhealth();
     statusBarIcon = new StatusbarIcon();
     statusBarMana = new StatusbarMana();
+    castingSpell = [];
 
 
     constructor(canvas, keyboard) {
@@ -18,23 +19,35 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld() {
         this.character.world = this;
     }
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    console.log('Colliding with Enemy', enemy);
-                    this.character.hit();
-                    this.statusBarHealth.setPercentage(this.character.energy);
-                }
-            });
+            this.checkCollisions();
+            this.checkCastingObjects();
         }, 200);
+    }
+
+    checkCastingObjects() {
+        if (this.keyboard.F) {
+            let spell = new CastingSpell(this.character.x, this.character.y);
+            this.castingSpell.push(spell);
+        }
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                console.log('Colliding with Enemy', enemy);
+                this.character.hit();
+                this.statusBarHealth.setPercentage(this.character.energy);
+            }
+        });
     }
 
     draw() {
@@ -54,6 +67,7 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.castingSpell);
 
         this.ctx.translate(-this.camera_x, 0);
 
