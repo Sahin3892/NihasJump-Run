@@ -1,0 +1,3 @@
+class Mana extends DrawableObject {
+    
+}

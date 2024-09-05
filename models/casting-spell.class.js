@@ -1,20 +1,43 @@
 class CastingSpell extends MovableObject {
 
-    constructor(x, y) {
-        super().loadImage('src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire1.png');
-        this.x = x;
-        this.y = y;
+    IMAGES_SPELL_FIRE = [
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire1.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire2.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire3.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire4.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire5.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire6.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire7.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire8.png',
+        'src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire9.png'
+    ];
+
+    constructor(x, y, direction) {
+        super()
+        this.loadImage('src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire1.png');
+        this.loadImages(this.IMAGES_SPELL_FIRE);
+        this.x = x + 100;
+        this.y = y + 50;
         this.height = 32;
         this.width = 32;
+        this.otherDirection = direction;
         this.cast();
     }
 
 
     cast() {
-        this.speedY = 5;
-        this.applyGravity();
-        setInterval(()=>{
-            this.x += 100;
+        this.speedY = 10;
+       // this.applyGravity();
+        if (!this.otherDirection) {
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_SPELL_FIRE);
+            this.x += 40;
         }, 60);
+        } else if (this.otherDirection) {
+            setInterval(() => {
+                this.playAnimation(this.IMAGES_SPELL_FIRE);
+                this.x -= 40;
+            }, 60);
+        }
     }
 }

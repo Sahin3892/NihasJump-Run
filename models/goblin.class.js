@@ -12,9 +12,9 @@ class Goblin extends MovableObject {
     ];
     goblin_sound = new Audio('src/audio/orcgaunt1.mp3');
         offset = {
-        top: 60,
-        left: 60,
-        right: 60,
+        top: 65,
+        left: 70,
+        right: 70,
         bottom: 60
     };
 
