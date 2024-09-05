@@ -4,6 +4,10 @@ const level1 = new Level(
     ],
 
     [
+        new Mana(), new Mana(), new Mana()
+    ],
+
+    [
         new Cloud(-719), new Cloud(0), new Cloud(719), new Cloud(719 * 2), new Cloud(719 * 3)
     ],
 

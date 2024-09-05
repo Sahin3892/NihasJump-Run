@@ -11,6 +11,7 @@ class World {
     statusBarIcon = new StatusbarIcon();
     statusBarMana = new StatusbarMana();
     castingSpell = [];
+    mana = new Mana();
 
 
     constructor(canvas, keyboard) {
@@ -67,6 +68,7 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.mana);
         this.addObjectsToMap(this.castingSpell);
 
         this.ctx.translate(-this.camera_x, 0);
