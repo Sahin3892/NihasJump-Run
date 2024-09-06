@@ -5,7 +5,6 @@ class World {
     ctx;
     keyboard;
     camera_x = 19;
-    otherDirection = false;
     statusBarBoarder = new StatusbarBoarder();
     statusBarHealth = new Statusbarhealth();
     statusBarIcon = new StatusbarIcon();
@@ -36,7 +35,7 @@ class World {
 
     checkCastingObjects() {
         if (this.keyboard.F) {
-            let spell = new CastingSpell(this.character.x, this.character.y);
+            let spell = new CastingSpell(this.character.x, this.character.y, this.character.otherDirection);
             this.castingSpell.push(spell);
         }
     }

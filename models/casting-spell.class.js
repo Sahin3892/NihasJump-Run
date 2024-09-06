@@ -27,17 +27,18 @@ class CastingSpell extends MovableObject {
 
     cast() {
         this.speedY = 10;
-       // this.applyGravity();
-        if (!this.otherDirection) {
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_SPELL_FIRE);
-            this.x += 40;
-        }, 60);
-        } else if (this.otherDirection) {
+        // this.applyGravity();
+        if (this.otherDirection) {
             setInterval(() => {
                 this.playAnimation(this.IMAGES_SPELL_FIRE);
                 this.x -= 40;
             }, 60);
+        } else {
+            setInterval(() => {
+                this.playAnimation(this.IMAGES_SPELL_FIRE);
+                this.x += 40;
+            }, 60);
         }
     }
+
 }
