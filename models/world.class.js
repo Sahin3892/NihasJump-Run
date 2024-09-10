@@ -12,7 +12,6 @@ class World {
     castingSpell = [];
 
 
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -48,6 +47,19 @@ class World {
                 this.statusBarHealth.setPercentage(this.character.energy);
             }
         });
+
+        this.level.mana.forEach((mana, index) => {
+            if (this.character.isColliding(mana) && this.statusBarMana.percentage < 100) {
+                console.log('Colliding with Mana', mana);
+                this.collectMana(index);
+            }
+        });
+    }
+
+    collectMana(index) {
+        this.level.mana.splice(index, 1);
+        this.statusBarMana.percentage = Math.min(this.statusBarMana.percentage + 20, 100);
+        this.statusBarMana.setPercentage(this.statusBarMana.percentage);
     }
 
     draw() {

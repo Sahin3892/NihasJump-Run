@@ -4,7 +4,7 @@ const level1 = new Level(
     ],
 
     [
-        new Mana(), new Mana(), new Mana()
+        new Mana(), new Mana(), new Mana(), new Mana(), new Mana(), new Mana()
     ],
 
     [

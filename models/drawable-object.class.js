@@ -23,7 +23,7 @@ class DrawableObject {
 
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Goblin || this instanceof Endboss || this instanceof CastingSpell) {
+        if (this instanceof Character || this instanceof Goblin || this instanceof Endboss || this instanceof CastingSpell || this instanceof Mana) {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'blue';

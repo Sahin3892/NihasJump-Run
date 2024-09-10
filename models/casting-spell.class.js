@@ -29,7 +29,7 @@ class CastingSpell extends MovableObject {
 
     cast() {
         this.speedY = 10;
- this.applyGravity();
+        this.applyGravity();
         if (this.otherDirection) {
             setInterval(() => {
                 this.playAnimation(this.IMAGES_SPELL_FIRE);

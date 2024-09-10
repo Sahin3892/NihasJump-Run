@@ -1,7 +1,7 @@
 class StatusbarMana extends DrawableObject {
 
     IMAGE_MANA = ['src/img/fantasy-platformer-game-ui/PNG/16Inner_Interface/magic_full_bar_new_edit.png'];
-    percentage = 100;
+    percentage = 0;
 
     constructor() {
         super();
@@ -9,7 +9,7 @@ class StatusbarMana extends DrawableObject {
         this.x = 98;
         this.y = 46;
         this.height = 12;
-        this.setPercentage(100);
+        this.setPercentage(0);
     }
 
         setPercentage(percentage) {
