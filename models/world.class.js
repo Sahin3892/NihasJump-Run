@@ -10,7 +10,7 @@ class World {
     statusBarIcon = new StatusbarIcon();
     statusBarMana = new StatusbarMana();
     castingSpell = [];
-    mana = new Mana();
+
 
 
     constructor(canvas, keyboard) {
