@@ -34,7 +34,7 @@ class CastingSpell extends MovableObject {
             setInterval(() => {
                 this.playAnimation(this.IMAGES_SPELL_FIRE);
                 if (this.x > (this.castPoint - 300)) {
-                    this.x -= 40;
+                    this.x -= 50;
                 } else {
                     this.x += 0;
                 }
@@ -50,5 +50,4 @@ class CastingSpell extends MovableObject {
             }, 60);
         }
     }
-
 }

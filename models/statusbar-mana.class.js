@@ -9,7 +9,7 @@ class StatusbarMana extends DrawableObject {
         this.x = 98;
         this.y = 46;
         this.height = 12;
-        this.setPercentage(0);
+        this.setPercentage(100);
     }
 
         setPercentage(percentage) {

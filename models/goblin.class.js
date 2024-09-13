@@ -18,15 +18,15 @@ class Goblin extends MovableObject {
         bottom: 60
     };
 
+    isDead = false;
 
     constructor() {
         super().loadImage('src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/0goblin.png');
         this.loadImages(this.IMAGES_WALKING);
-
         this.x = 300 + Math.random() * 500;
         this.speed = 0.15 + Math.random() * 0.25;
         this.animate();
-        this.goblinSound();
+        this.goblinScream();
     }
 
     animate() {
@@ -36,12 +36,22 @@ class Goblin extends MovableObject {
         }, 1000 / 60);
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
-            this.goblin_sound();
+            this.goblinScream();
         }, 300);
     }
 
-    goblinSound() {
-        this.goblin_sound.play();
-        this.goblin_sound.volume = 0.05;
+    die(enemies, enemyIndex){
+        if(!this.isDead) {
+            this.isDead = true;
+            // Animation
+            setTimeout( () => {
+                // Gegner löschen
+                enemies.splice(enemyIndex, 1);
+            }, 1000);
+        }
+    }
+    goblinScream() {
+     //   this.goblin_sound.play();
+     //   this.goblin_sound.volume = 0.05;
     }
 }

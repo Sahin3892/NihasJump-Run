@@ -9,6 +9,7 @@ class World {
     statusBarHealth = new Statusbarhealth();
     statusBarIcon = new StatusbarIcon();
     statusBarMana = new StatusbarMana();
+    goblin = new Goblin();
     castingSpell = [];
 
 
@@ -33,9 +34,11 @@ class World {
     }
 
     checkCastingObjects() {
-        if (this.keyboard.F) {
+        if (this.keyboard.F && (this.statusBarMana.percentage > 0)) {
             let spell = new CastingSpell(this.character.x, this.character.y, this.character.otherDirection);
             this.castingSpell.push(spell);
+            this.statusBarMana.percentage -= 10;  // Reduziert den Anteil um 10
+            this.statusBarMana.setPercentage(this.statusBarMana.percentage);  // Aktualisiert den Prozentwert
         }
     }
 
@@ -54,6 +57,16 @@ class World {
                 this.collectMana(index);
             }
         });
+
+       this.castingSpell.forEach((spell, spellIndex) => {
+           this.level.enemies.forEach((enemy, enemyIndex) => {
+               if (spell.isColliding(enemy)) {
+                   console.log('Zauber Getroffen', enemy);
+                   enemy.die(this.level.enemies, enemyIndex);
+               }
+           });
+       });
+
     }
 
     collectMana(index) {
@@ -61,6 +74,7 @@ class World {
         this.statusBarMana.percentage = Math.min(this.statusBarMana.percentage + 20, 100);
         this.statusBarMana.setPercentage(this.statusBarMana.percentage);
     }
+
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
