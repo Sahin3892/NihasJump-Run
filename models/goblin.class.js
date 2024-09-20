@@ -10,6 +10,13 @@ class Goblin extends MovableObject {
         'src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/walk5.png',
         'src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/walk6.png'
     ];
+    IMAGES_DEAD = [
+        'src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/death1.png',
+        'src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/death2.png',
+        'src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/death3.png',
+        'src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/death4.png'
+    ];
+
     goblin_sound = new Audio('src/audio/orcgaunt1.mp3');
     offset = {
         top: 65,
@@ -23,6 +30,7 @@ class Goblin extends MovableObject {
     constructor() {
         super().loadImage('src/img/pixel-art-monster-enemy-game-sprites/PNG/goblin/0goblin.png');
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_DEAD);
         this.x = 300 + Math.random() * 500;
         this.speed = 0.15 + Math.random() * 0.25;
         this.animate();
@@ -35,23 +43,32 @@ class Goblin extends MovableObject {
             this.otherDirection = false;
         }, 1000 / 60);
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-            this.goblinScream();
+              if(this.isDead) {
+                this.playAnimation(this.IMAGES_DEAD);
+                  if(this.currentImage === 4) {
+                      // Hier ist alles zu Ende
+                      // Alle Animationen anhalten
+                      // Goblin löschen
+                  }
+              } else {
+                    this.playAnimation(this.IMAGES_WALKING);
+                    this.goblinScream();
+                }
         }, 300);
     }
-
-    die(enemies, enemyIndex){
-        if(!this.isDead) {
+    die(enemies, enemyIndex) {
+        if (!this.isDead) {
+            this.currentImage = 0;
             this.isDead = true;
-            // Animation
-            setTimeout( () => {
+            setTimeout(() => {
                 // Gegner löschen
                 enemies.splice(enemyIndex, 1);
-            }, 1000);
+            }, 500);
         }
     }
+
     goblinScream() {
-     //   this.goblin_sound.play();
-     //   this.goblin_sound.volume = 0.05;
+        //   this.goblin_sound.play();
+        //   this.goblin_sound.volume = 0.05;
     }
 }
