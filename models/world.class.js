@@ -9,6 +9,7 @@ class World {
     statusBarHealth = new Statusbarhealth();
     statusBarIcon = new StatusbarIcon();
     statusBarMana = new StatusbarMana();
+    statusBarBoss = new StatusbarhealthBoss();
     goblin = new Goblin();
     castingSpell = [];
 
@@ -88,6 +89,7 @@ class World {
         this.addToMap(this.statusBarIcon);
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarMana);
+        this.addToMap(this.statusBarBoss);
         this.ctx.translate(this.camera_x, 0); // Forwards
 
         this.addToMap(this.character);
