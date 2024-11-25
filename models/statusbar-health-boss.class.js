@@ -6,7 +6,7 @@ class StatusbarhealthBoss extends DrawableObject {
     constructor() {
         super()
         this.loadImages(this.IMAGE_HEALTH);
-        this.x = 1700;
+        this.x = 2700;
         this.y = 27;
         this.height = 13;
         this.setPercentage(100);

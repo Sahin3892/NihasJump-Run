@@ -89,9 +89,9 @@ class World {
         this.addToMap(this.statusBarIcon);
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarMana);
-        this.addToMap(this.statusBarBoss);
-        this.ctx.translate(this.camera_x, 0); // Forwards
 
+        this.ctx.translate(this.camera_x, 0); // Forwards
+        this.addToMap(this.statusBarBoss);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
