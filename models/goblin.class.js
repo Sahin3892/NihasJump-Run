@@ -18,7 +18,7 @@ class Goblin extends MovableObject {
     ];
 
     goblin_sound = new Audio('src/audio/orcgaunt1.mp3');
-    goblin_sound_death = new Audio('src/audio/Goblin2.mp3');
+    goblin_sound_death = new Audio('src/audio/goblin-death.mp3');
     offset = {
         top: 65,
         left: 70,
@@ -39,21 +39,21 @@ class Goblin extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
-            // this.moveLeft();
-            this.otherDirection = false;
+        this.movementInterval = setInterval(() => {
+            if (!this.isDead) {
+                this.otherDirection = false;
+                // this.moveLeft();
+            }
         }, 1000 / 60);
-        setInterval(() => {
-            if (this.isDead) {
+
+        this.animationInterval = setInterval(() => {
+            if (this.isDead && this.currentImage < this.IMAGES_DEAD.length - 1) {
                 this.playAnimation(this.IMAGES_DEAD);
-                if (this.currentImage === 4) {
-                    // Hier ist alles zu Ende
-                    // Alle Animationen anhalten
-                    // Goblin löschen
-                }
+            } else if (this.isDead && this.currentImage >= this.IMAGES_DEAD.length - 1) {
+                this.clearAnimation();
             } else {
                 this.playAnimation(this.IMAGES_WALKING);
-                //  this.goblinScream();
+                // this.goblinScream();
             }
         }, 300);
     }
@@ -62,11 +62,20 @@ class Goblin extends MovableObject {
         if (!this.isDead) {
             this.currentImage = 0;
             this.isDead = true;
+            this.goblin_sound_death.play();
+            this.clearMovement();
             setTimeout(() => {
-                // Gegner löschen
                 enemies.splice(enemyIndex, 1);
-            }, 500);
+            }, 300 * this.IMAGES_DEAD.length); // Zeit für die Abspielung der Todesanimation
         }
+    }
+
+    clearAnimation() {
+        clearInterval(this.animationInterval);
+    }
+
+    clearMovement() {
+        clearInterval(this.movementInterval);
     }
 
     goblinScream() {
