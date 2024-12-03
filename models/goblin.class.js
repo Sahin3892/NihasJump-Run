@@ -58,14 +58,18 @@ class Goblin extends MovableObject {
         }, 300);
     }
 
-    die(enemies, enemyIndex) {
+    die(enemies) {
         if (!this.isDead) {
             this.currentImage = 0;
             this.isDead = true;
             this.goblin_sound_death.play();
             this.clearMovement();
             setTimeout(() => {
-                enemies.splice(enemyIndex, 1);
+                // Filtere die lebenden Gegner heraus
+                const filteredEnemies = enemies.filter(enemy => enemy !== this);
+                // Setze das gefilterte Array zurück
+                enemies.length = 0;
+                enemies.push(...filteredEnemies);
             }, 300 * this.IMAGES_DEAD.length); // Zeit für die Abspielung der Todesanimation
         }
     }
