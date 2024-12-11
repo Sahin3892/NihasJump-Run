@@ -70,6 +70,8 @@ class World {
 
     }
 
+
+
     collectMana(index) {
         this.level.mana.splice(index, 1);
         this.statusBarMana.percentage = Math.min(this.statusBarMana.percentage + 20, 100);

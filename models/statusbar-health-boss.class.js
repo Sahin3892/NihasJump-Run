@@ -14,7 +14,7 @@ class StatusbarhealthBoss extends DrawableObject {
 
     setPercentage(percentage) {
         this.percentage = percentage;
-        let path = this.IMAGE_HEALTH[this.resolveImageIndex()];
+        let path = this.IMAGE_HEALTH[this.resolveImageIndex()]; // Hier wird resolveImageIndex aufgerufen
         this.img = this.imageCache[path];
     }
 

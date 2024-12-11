@@ -12,9 +12,9 @@ class Endboss extends MovableObject {
     ];
 
     IMAGES_HURT = [
-        'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png',
-        'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt2.png',
+        'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png'
     ];
+
     offset = {
         top: 170,
         left: 215,
@@ -25,8 +25,12 @@ class Endboss extends MovableObject {
     constructor() {
         super().loadImage('src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png');
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_HURT);
+
+        this.health = 100; // Prozentuale Lebenspunkte
+        this.statusbar = new StatusbarhealthBoss(); // Statusbar initialisieren
+
         this.x = 2350;
-        this.health = 100; // Beispielwert für die Lebenspunkte
         this.animate();
     }
 
@@ -38,13 +42,22 @@ class Endboss extends MovableObject {
 
     takeDamage(amount) {
         this.health -= amount;
+
+        // Berechnen und setzen des neuen Gesundheitsprozentsatzes
+        const newHealthPercentage = Math.max(this.health, 0);
+        this.statusbar.setPercentage(newHealthPercentage);
+
+        this.playAnimation(this.IMAGES_HURT);
+        setTimeout(() => {
+            this.playAnimation(this.IMAGES_WALKING);
+        }, 500);
+
         if (this.health <= 0) {
             this.die();
         }
     }
 
     die() {
-        // Logik für das Sterben des Bosses, z.B. Animation oder Spielstatus ändern
         console.log("Der Boss ist besiegt!");
     }
 }
