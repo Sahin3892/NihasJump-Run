@@ -2,6 +2,7 @@ class Endboss extends MovableObject {
     height = 600;
     width = 600;
     y = -15;
+    world;
 
     IMAGES_WALKING = [
         'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png',
@@ -22,6 +23,7 @@ class Endboss extends MovableObject {
         bottom: 140
     };
 
+
     constructor() {
         super().loadImage('src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -40,24 +42,5 @@ class Endboss extends MovableObject {
         }, 200);
     }
 
-    takeDamage(amount) {
-        this.health -= amount;
 
-        // Berechnen und setzen des neuen Gesundheitsprozentsatzes
-        const newHealthPercentage = Math.max(this.health, 0);
-        this.statusbar.setPercentage(newHealthPercentage);
-
-        this.playAnimation(this.IMAGES_HURT);
-        setTimeout(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 500);
-
-        if (this.health <= 0) {
-            this.die();
-        }
-    }
-
-    die() {
-        console.log("Der Boss ist besiegt!");
-    }
 }
