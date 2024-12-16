@@ -36,6 +36,14 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
+
+    getHit() {
+        this.playAnimation(this.IMAGES_HURT);
+    }
+
+    bossDie(){
+
+    }
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
