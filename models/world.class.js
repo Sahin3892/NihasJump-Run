@@ -10,7 +10,6 @@ class World {
     statusBarIcon = new StatusbarIcon();
     statusBarMana = new StatusbarMana();
     statusBarBoss = new StatusbarhealthBoss();
-    goblin = new Goblin();
     castingSpell = [];
 
 
@@ -59,14 +58,23 @@ class World {
             }
         });
 
-       this.castingSpell.forEach((spell, spellIndex) => {
-           this.level.enemies.forEach((enemy, enemyIndex) => {
-               if (spell.isColliding(enemy)) {
-                   console.log('Zauber Getroffen', enemy);
-                   enemy.die(this.level.enemies, enemyIndex);
-               }
-           });
-       });
+        this.castingSpell.forEach((spell, spellIndex) => {
+            this.level.enemies.forEach((enemy, enemyIndex) => {
+                if (spell.isColliding(enemy)) {
+                    console.log('Zauber Getroffen', enemy);
+                    enemy.die(this.level.enemies, enemyIndex);
+                }
+            });
+        });
+
+        this.castingSpell.forEach((spell, spellIndex) => {
+            this.level.boss.forEach((boss) => {
+                if (spell.isColliding(boss)) {
+                    console.log('Zauber Getroffen', boss);
+
+                }
+            });
+        });
     }
 
 
@@ -89,12 +97,14 @@ class World {
         this.addToMap(this.statusBarIcon);
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarMana);
-
-        this.ctx.translate(this.camera_x, 0); // Forwards
         this.addToMap(this.statusBarBoss);
+
+        this.ctx.translate(this.camera_x, 0); // Forward
+
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.boss)
         this.addObjectsToMap(this.level.mana);
         this.addObjectsToMap(this.castingSpell);
 

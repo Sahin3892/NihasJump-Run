@@ -2,7 +2,6 @@ class Endboss extends MovableObject {
     height = 600;
     width = 600;
     y = -15;
-    world;
 
     IMAGES_WALKING = [
         'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png',
@@ -41,9 +40,10 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_HURT);
     }
 
-    bossDie(){
+    bossDie() {
 
     }
+
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
