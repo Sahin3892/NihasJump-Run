@@ -11,6 +11,7 @@ class World {
     statusBarMana = new StatusbarMana();
     statusBarBoss = new StatusbarhealthBoss();
     castingSpell = [];
+    endboss = new Endboss();
 
 
     constructor(canvas, keyboard) {
@@ -71,7 +72,7 @@ class World {
             this.level.boss.forEach((boss) => {
                 if (spell.isColliding(boss)) {
                     console.log('Zauber Getroffen', boss);
-
+                    this.endboss.getHit();
                 }
             });
         });

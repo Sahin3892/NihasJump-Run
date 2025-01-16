@@ -12,7 +12,8 @@ class Endboss extends MovableObject {
     ];
 
     IMAGES_HURT = [
-        'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png'
+        'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png',
+        'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt2.png'
     ];
 
     offset = {
@@ -21,7 +22,7 @@ class Endboss extends MovableObject {
         right: 215,
         bottom: 140
     };
-
+    health = 100;
 
     constructor() {
         super().loadImage('src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png');
@@ -37,7 +38,9 @@ class Endboss extends MovableObject {
 
 
     getHit() {
-        this.playAnimation(this.IMAGES_HURT);
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_HURT);
+        }, 1000 / 60);
     }
 
     bossDie() {
@@ -45,9 +48,11 @@ class Endboss extends MovableObject {
     }
 
     animate() {
+
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
+
     }
 
 
