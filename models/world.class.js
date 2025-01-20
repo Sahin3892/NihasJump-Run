@@ -73,6 +73,7 @@ class World {
                 if (spell.isColliding(boss)) {
                     console.log('Zauber Getroffen', boss);
                     this.endboss.getHit();
+                    this.statusBarBoss.setPercentage(this.endboss.percentage);
                 }
             });
         });
@@ -98,11 +99,12 @@ class World {
         this.addToMap(this.statusBarIcon);
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarMana);
-        this.addToMap(this.statusBarBoss);
+
 
         this.ctx.translate(this.camera_x, 0); // Forward
 
         this.addToMap(this.character);
+        this.addToMap(this.statusBarBoss);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.boss)

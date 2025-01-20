@@ -22,22 +22,19 @@ class Endboss extends MovableObject {
         right: 215,
         bottom: 140
     };
-    health = 100;
+
 
     constructor() {
         super().loadImage('src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HURT);
-
-        this.health = 100; // Prozentuale Lebenspunkte
-        this.statusbar = new StatusbarhealthBoss(); // Statusbar initialisieren
-
         this.x = 2350;
         this.animate();
     }
 
 
     getHit() {
+
         setInterval(() => {
             this.playAnimation(this.IMAGES_HURT);
         }, 1000 / 60);
