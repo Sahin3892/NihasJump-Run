@@ -13,7 +13,8 @@ class StatusbarhealthBoss extends DrawableObject {
     }
 
     setPercentage(percentage) {
-        this.percentage = percentage;
+        const actualPercentage = Math.max(this.percentage - 20, percentage); // Ensure reduction does not exceed 20 points
+        this.percentage = actualPercentage;
         let path = this.IMAGE_HEALTH[this.resolveImageIndex()]; // Hier wird resolveImageIndex aufgerufen
         this.img = this.imageCache[path];
     }

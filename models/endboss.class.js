@@ -2,6 +2,7 @@ class Endboss extends MovableObject {
     height = 600;
     width = 600;
     y = -15;
+    health = 100; // Add a health property
 
     IMAGES_WALKING = [
         'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png',
@@ -23,7 +24,6 @@ class Endboss extends MovableObject {
         bottom: 140
     };
 
-
     constructor() {
         super().loadImage('src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -32,25 +32,24 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
-
-    getHit() {
-
-        setInterval(() => {
+    getHit(damage) {
+        const actualDamage = Math.min(damage, 20); // Ensure damage does not exceed 20
+        this.health -= actualDamage; // Decrease health by actual damage
+        if (this.health <= 0) {
+            this.bossDie();
+        } else {
             this.playAnimation(this.IMAGES_HURT);
-        }, 1000 / 60);
+        }
     }
 
     bossDie() {
-
+        // Implement boss death logic here
+        console.log('Boss is dead');
     }
 
     animate() {
-
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
-
     }
-
-
 }
