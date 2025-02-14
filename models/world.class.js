@@ -72,8 +72,9 @@ class World {
             this.level.boss.forEach((boss) => {
                 if (spell.isColliding(boss)) {
                     console.log('Zauber Getroffen', boss);
-                    this.endboss.getHit();
+                    this.endboss.getHit(20);
                     this.statusBarBoss.setPercentage(this.endboss.percentage);
+                    this.castingSpell.splice(spellIndex, 1);
                 }
             });
         });

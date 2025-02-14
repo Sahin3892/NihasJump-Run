@@ -3,6 +3,7 @@ class Endboss extends MovableObject {
     width = 600;
     y = -15;
     health = 100; // Add a health property
+    percentage = 100; // Add a percentage property
 
     IMAGES_WALKING = [
         'src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png',
@@ -35,10 +36,12 @@ class Endboss extends MovableObject {
     getHit(damage) {
         const actualDamage = Math.min(damage, 20); // Ensure damage does not exceed 20
         this.health -= actualDamage; // Decrease health by actual damage
+        this.percentage = this.health; // Update percentage for health bar
+        this.playAnimation(this.IMAGES_HURT); // Play hurt animation
         if (this.health <= 0) {
+            this.health = 0;
+            this.percentage = 0;
             this.bossDie();
-        } else {
-            this.playAnimation(this.IMAGES_HURT);
         }
     }
 
