@@ -65,7 +65,21 @@ class Endboss extends MovableObject {
     }
 
     bossDie() {
-        // Implement boss death logic here
-        console.log('Boss is dead');
+        clearInterval(this.walkingInterval); // Clear walking animation
+        this.currentImage = 0; // Reset animation frame
+
+        // Play death animation once
+        const deathInterval = setInterval(() => {
+            this.playAnimation(this.IMAGES_DEAD_BOSS);
+            
+            // Stop the animation after playing through all frames once
+            if (this.currentImage >= this.IMAGES_DEAD_BOSS.length) {
+                clearInterval(deathInterval);
+                this.loadImage(this.IMAGES_DEAD_BOSS[this.IMAGES_DEAD_BOSS.length - 1]); // Stay on last frame
+                setTimeout(() => {
+                    this.y = -5000; // Move the boss off screen
+                }, 500); // Adjust the timeout duration as needed
+            }
+        }, 200);
     }
-}
+} // Endboss class end
