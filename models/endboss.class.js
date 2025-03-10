@@ -59,7 +59,11 @@ class Endboss extends MovableObject {
     }
 
     animate() {
-        this.walkingInterval = setInterval(() => {
+              setInterval(() => {
+        if (this.getHit == true) {
+            this.playAnimation(this.IMAGES_HURT);
+        } else
+
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
     }
