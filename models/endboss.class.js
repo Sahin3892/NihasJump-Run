@@ -26,6 +26,18 @@ class Endboss extends MovableObject {
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Death4.png",
   ];
 
+  IMAGES_BOSS_IDLE = [
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Idle1.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Idle2.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Idle3.png",
+  ];
+
+  walkingInterval;
+  hurtInterval;
+  dieInterval;
+
+  // Define the offset for collision detection
+
   offset = {
     top: 170,
     left: 215,
@@ -39,6 +51,8 @@ class Endboss extends MovableObject {
     );
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_DEAD_BOSS);
+    this.loadImages(this.IMAGES_BOSS_IDLE);
     this.x = 2350;
     this.animate();
   }
@@ -64,7 +78,7 @@ class Endboss extends MovableObject {
     setInterval(() => {
       if (this.getHit == true) {
         this.playAnimation(this.IMAGES_HURT);
-      } else this.playAnimation(this.IMAGES_WALKING);
+      } else this.playAnimation(this.IMAGES_BOSS_IDLE);
     }, 200);
   }
 
