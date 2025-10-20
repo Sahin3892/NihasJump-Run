@@ -16,6 +16,10 @@ class Endboss extends MovableObject {
   IMAGES_HURT = [
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png",
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt2.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt2.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt2.png",
   ];
 
   IMAGES_DEAD_BOSS = [
@@ -47,10 +51,10 @@ class Endboss extends MovableObject {
 
   constructor() {
     super().loadImage(
-      "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png"
+      "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png" // Überprüfe ob Idle notwendig ist
     );
     this.loadImages(this.IMAGES_WALKING);
-    this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_HURT); // Lade die Bilder mehrfach
     this.loadImages(this.IMAGES_DEAD_BOSS);
     this.loadImages(this.IMAGES_BOSS_IDLE);
     this.x = 2350;
@@ -76,7 +80,9 @@ class Endboss extends MovableObject {
 
   animate() {
     setInterval(() => {
+      //
       if (this.getHit == true) {
+        // Is Hurt Flag setzen
         this.playAnimation(this.IMAGES_HURT);
       } else this.playAnimation(this.IMAGES_BOSS_IDLE);
     }, 200);

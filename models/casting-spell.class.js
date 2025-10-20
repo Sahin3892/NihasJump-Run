@@ -31,7 +31,7 @@ class CastingSpell extends MovableObject {
     this.speedY = 10;
     this.applyGravity();
     if (this.otherDirection) {
-      setInterval(() => {
+      setInterval(() => {  // Interval Cache leeren
         this.playAnimation(this.IMAGES_SPELL_FIRE);
         if (this.x > this.castPoint - 300) {
           this.x -= 50;
@@ -51,3 +51,4 @@ class CastingSpell extends MovableObject {
     }
   }
 }
+// Zauber mit splice aus Array entfernen bei Kollision mit Endboss
