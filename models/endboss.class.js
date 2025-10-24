@@ -39,6 +39,7 @@ class Endboss extends MovableObject {
   walkingInterval;
   hurtInterval;
   dieInterval;
+  lastHit = 0; // Timestamp für die letzte Verletzung
 
   // Define the offset for collision detection
 
@@ -65,26 +66,30 @@ class Endboss extends MovableObject {
     const actualDamage = Math.min(damage, 20); // Ensure damage does not exceed 20
     this.health -= actualDamage; // Decrease health by actual damage
     this.percentage = this.health; // Update percentage for health bar
-    clearInterval(this.walkingInterval); // Stop walking animation
-    this.playAnimation(this.IMAGES_HURT); // Play hurt animation
+    this.lastHit = new Date().getTime(); // Setze Zeitstempel für Hurt-Animation
+
     if (this.health <= 0) {
       this.health = 0;
       this.percentage = 0;
       this.bossDie();
-    } else {
-      setTimeout(() => {
-        this.animate(); // Resume walking animation after hurt animation
-      }, 500); // Adjust the timeout duration as needed
     }
   }
 
+  isHurt() {
+    let timepassed = new Date().getTime() - this.lastHit;
+    timepassed = timepassed / 1000; // Konvertiere zu Sekunden
+    return timepassed < 0.5; // Hurt-Animation für 0.5 Sekunden
+  }
+
   animate() {
-    setInterval(() => {
-      //
-      if (this.getHit == true) {
-        // Is Hurt Flag setzen
+    this.walkingInterval = setInterval(() => {
+      if (this.isHurt()) {
+        // Spiele Hurt-Animation wenn Boss verletzt wurde
         this.playAnimation(this.IMAGES_HURT);
-      } else this.playAnimation(this.IMAGES_BOSS_IDLE);
+      } else {
+        // Spiele Idle-Animation wenn Boss nicht verletzt ist
+        this.playAnimation(this.IMAGES_BOSS_IDLE);
+      }
     }, 200);
   }
 
