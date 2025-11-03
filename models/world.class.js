@@ -11,7 +11,6 @@ class World {
   statusBarMana = new StatusbarMana();
   statusBarBoss = new StatusbarhealthBoss();
   castingSpell = [];
-  endboss = new Endboss();
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -78,8 +77,8 @@ class World {
       this.level.boss.forEach((boss) => {
         if (spell.isColliding(boss)) {
           console.log("Zauber Getroffen", boss);
-          this.endboss.getHit(20);
-          this.statusBarBoss.setPercentage(this.endboss.percentage);
+          boss.getHit(20);
+          this.statusBarBoss.setPercentage(boss.percentage);
           this.castingSpell.splice(spellIndex, 1);
         }
       });

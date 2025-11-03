@@ -5,14 +5,6 @@ class Endboss extends MovableObject {
   health = 100; // Add a health property
   percentage = 100; // Add a percentage property
 
-  IMAGES_WALKING = [
-    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png",
-    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger2.png",
-    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger3.png",
-    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger4.png",
-    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger5.png",
-  ];
-
   IMAGES_HURT = [
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png",
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt2.png",
@@ -36,7 +28,6 @@ class Endboss extends MovableObject {
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Idle3.png",
   ];
 
-  walkingInterval;
   hurtInterval;
   dieInterval;
 
@@ -53,7 +44,6 @@ class Endboss extends MovableObject {
     super().loadImage(
       "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png" // Überprüfe ob Idle notwendig ist
     );
-    this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_HURT); // Lade die Bilder mehrfach
     this.loadImages(this.IMAGES_DEAD_BOSS);
     this.loadImages(this.IMAGES_BOSS_IDLE);
@@ -62,27 +52,28 @@ class Endboss extends MovableObject {
   }
 
   getHit(damage) {
+    console.log("getHit wurde aufgerufen um", new Date().getTime());
     const actualDamage = Math.min(damage, 20); // Ensure damage does not exceed 20
     this.health -= actualDamage; // Decrease health by actual damage
     this.percentage = this.health; // Update percentage for health bar
-    clearInterval(this.walkingInterval); // Stop walking animation
-    this.playAnimation(this.IMAGES_HURT); // Play hurt animation
+    this.isHurt = true; // Set isHurt flag to true
+    console.log("Hurt Animation wird Abgespielt"); // Play hurt animation
     if (this.health <= 0) {
       this.health = 0;
       this.percentage = 0;
       this.bossDie();
     } else {
       setTimeout(() => {
-        this.animate(); // Resume walking animation after hurt animation
+        this.isHurt = false; // Reset isHurt flag after animation
       }, 500); // Adjust the timeout duration as needed
     }
   }
 
-  animate() {
-    setInterval(() => {
-      //
-      if (this.getHit == true) {
-        // Is Hurt Flag setzen
+  animate() { 
+    console.log("Neues Interval gestartet");
+    setInterval(() => { 
+      if (this.isHurt == true) {
+        console.log("Boss is Hurt");
         this.playAnimation(this.IMAGES_HURT);
       } else this.playAnimation(this.IMAGES_BOSS_IDLE);
     }, 200);
