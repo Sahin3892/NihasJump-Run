@@ -8,10 +8,6 @@ class Endboss extends MovableObject {
   IMAGES_HURT = [
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png",
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt2.png",
-    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png",
-    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt2.png",
-    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png",
-    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt2.png",
   ];
 
   IMAGES_DEAD_BOSS = [
