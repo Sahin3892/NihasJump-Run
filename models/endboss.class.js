@@ -4,6 +4,8 @@ class Endboss extends MovableObject {
   y = -15;
   health = 100; // Add a health property
   percentage = 100; // Add a percentage property
+  isDead = false;
+  deathAnimationComplete = false; // Ist die Tod-Animation fertig?
 
   IMAGES_HURT = [
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png",
@@ -68,8 +70,14 @@ class Endboss extends MovableObject {
   animate() {
     console.log("Neues Interval gestartet");
     setInterval(() => {
-      if (this.bossDie == true) {
-        this.playAnimation(this.IMAGES_DEAD_BOSS);
+      if (this.isDead === true) {
+        if (this.deathAnimationComplete === false) {
+          this.playAnimation(this.IMAGES_DEAD_BOSS); // Spiele Animation
+          // Prüfe DANACH, ob wir jetzt beim letzten Bild sind
+          if (this.currentImage >= this.IMAGES_DEAD_BOSS.length) {
+            this.deathAnimationComplete = true;
+          }
+        }
       } else if (this.isHurt == true) {
         console.log("Boss is Hurt");
         this.playAnimation(this.IMAGES_HURT);
@@ -78,7 +86,8 @@ class Endboss extends MovableObject {
   }
 
   bossDie() {
-    this.bossDie = true;
+    this.isDead = true;
+    this.currentImage = 0;
     console.log("Boss is dead");
   }
 }
