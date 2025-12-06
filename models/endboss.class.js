@@ -73,7 +73,7 @@ class Endboss extends MovableObject {
       if (this.isDead === true) {
         if (this.deathAnimationComplete === false) {
           this.playAnimation(this.IMAGES_DEAD_BOSS); // Spiele Animation
-          // Prüfe DANACH, ob wir jetzt beim letzten Bild sind
+          // Prüfe ob jetzt beim letzten Bild ist
           if (this.currentImage >= this.IMAGES_DEAD_BOSS.length) {
             this.deathAnimationComplete = true;
           }
