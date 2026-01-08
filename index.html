@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" translate="no">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="src/img/AVAS/ava2.png" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="src/img/AVAS/ava2.png"
+      type="image/x-icon"
+    />
     <title>NihasJump&Run</title>
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
@@ -27,9 +33,13 @@
     <script src="models/level.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="game.js"></script>
-</head>
-<body onload="init()">
-<h1>Nihas Jump&Run</h1>
-<canvas id="canvas" width="720" height="480"></canvas>
-</body>
+    <script src="ui-controls.js"></script>
+  </head>
+
+  <body onload="init()">
+    <h1>Nihas Jump&Run</h1>
+    <div id="fullscreen">
+      <canvas id="canvas" width="720" height="480"></canvas>
+    </div>
+  </body>
 </html>
