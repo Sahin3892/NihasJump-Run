@@ -11,7 +11,7 @@ class CastingSpell extends MovableObject {
     "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Fire/fire9.png",
   ];
   castPoint;
-
+  attack_sound = new Audio("src/audio/fire_attack.mp3");
   constructor(x, y, direction) {
     super();
     this.loadImage(
@@ -31,7 +31,8 @@ class CastingSpell extends MovableObject {
     this.speedY = 10;
     this.applyGravity();
     if (this.otherDirection) {
-      setInterval(() => {  // Interval Cache leeren
+      setInterval(() => {
+        // Interval Cache leeren
         this.playAnimation(this.IMAGES_SPELL_FIRE);
         if (this.x > this.castPoint - 300) {
           this.x -= 50;
@@ -48,6 +49,7 @@ class CastingSpell extends MovableObject {
           this.x += 0;
         }
       }, 60);
+      this.attack_sound.play();
     }
   }
 }

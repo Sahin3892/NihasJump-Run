@@ -69,7 +69,6 @@ class Character extends MovableObject {
   walking_sound = new Audio("src/audio/step.mp3");
   jumping_sound = new Audio("src/audio/jump.mp3");
   idle_sound = new Audio("src/audio/idle.mp3");
-  attack_sound = new Audio("src/audio/fireball.mp3");
   offset = {
     top: 70,
     left: 50,
@@ -135,7 +134,6 @@ class Character extends MovableObject {
         this.playAnimation(this.IMAGES_JUMPING);
       } else if (this.world.keyboard.F) {
         this.playAnimation(this.IMAGES_CAST);
-        this.attack_sound.play().volume = 1;
         this.resetIdleTimer();
       } else {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
