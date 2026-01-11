@@ -46,9 +46,29 @@ class Character extends MovableObject {
     "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Attack/attack6.png",
     "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Attack/attack7.png",
   ];
+  IMAGES_IDLE = [
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle1.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle2.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle3.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle4.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle5.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle6.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle7.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle8.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle9.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle10.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle11.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle12.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle13.png",
+    "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/Idle/idle14.png",
+  ];
   world;
+  idleInterval;
+  idleTimer;
+  animationIntervals;
   walking_sound = new Audio("src/audio/step.mp3");
   jumping_sound = new Audio("src/audio/jump.mp3");
+  idle_sound = new Audio("src/audio/idle.mp3");
   offset = {
     top: 70,
     left: 50,
@@ -65,9 +85,12 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_CAST);
+    this.loadImages(this.IMAGES_IDLE);
     this.applyGravity();
     this.animate();
     this.soundSettings();
+    this.idleTimer = null;
+    this.state = false;
   }
 
   animate() {
@@ -75,15 +98,19 @@ class Character extends MovableObject {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.otherDirection = false;
+        this.resetIdleTimer();
         if (!this.isAboveGround()) {
           this.soundSettings();
+          this.resetIdleTimer();
         }
       }
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.moveLeft();
         this.otherDirection = true;
+        this.resetIdleTimer();
         if (!this.isAboveGround()) {
           this.soundSettings();
+          this.resetIdleTimer();
         }
       }
       if (
@@ -97,7 +124,7 @@ class Character extends MovableObject {
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
 
-    setInterval(() => {
+    this.animationIntervals = setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
       } else if (this.isHurt()) {
@@ -109,13 +136,36 @@ class Character extends MovableObject {
       } else {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
           this.playAnimation(this.IMAGES_WALKING);
-        } else {
+        } else if (!this.state) {
           this.loadImage(
             "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/mage.png"
           );
         }
       }
     }, 50);
+  }
+
+  resetIdleTimer() {
+    clearTimeout(this.idleTimer);
+    clearInterval(this.idleInterval);
+    this.idleTimer = setTimeout(() => {
+      this.state = "idle";
+      this.playIdleAnimation();
+      console.log("idleTimer", this.idleTimer);
+    }, 3000);
+    this.state = false;
+    this.idle_sound.pause();
+    this.idle_sound.currentTime = 0;
+  }
+
+  playIdleAnimation() {
+    clearInterval(this.idleInterval);
+    this.idleInterval = setInterval(() => {
+      this.playAnimation(this.IMAGES_IDLE);
+      this.idle_sound.play();
+      this.idle_sound.volume = 0.35;
+      console.log("idleAnimaton", this.idleInterval);
+    }, 200);
   }
 
   soundSettings() {
