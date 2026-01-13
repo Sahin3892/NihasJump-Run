@@ -3,6 +3,7 @@ class Statusbarhealth extends DrawableObject {
     "src/img/fantasy-platformer-game-ui/PNG/16Inner_Interface/hp_full_new_edit.png",
   ];
   percentage = 100;
+  damage_sound = new Audio("src/audio/char_dmg_sound.mp3");
 
   constructor() {
     super();
@@ -17,6 +18,7 @@ class Statusbarhealth extends DrawableObject {
     this.percentage = percentage;
     let path = this.IMAGE_HEALTH[this.resolveImageIndex()];
     this.img = this.imageCache[path];
+    this.damage_sound.play();
   }
 
   resolveImageIndex() {

@@ -69,6 +69,7 @@ class Character extends MovableObject {
   walking_sound = new Audio("src/audio/step.mp3");
   jumping_sound = new Audio("src/audio/jump.mp3");
   idle_sound = new Audio("src/audio/idle.mp3");
+  damage_sound = new Audio("src/audio/char_dmg_sound.mp3");
   offset = {
     top: 70,
     left: 50,

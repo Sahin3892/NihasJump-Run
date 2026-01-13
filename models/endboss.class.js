@@ -25,7 +25,8 @@ class Endboss extends MovableObject {
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Idle2.png",
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Idle3.png",
   ];
-
+  damage_sound_boss = new Audio("src/audio/boss_hit_sound.mp3");
+  dead_sound_boss = new Audio("src/audio/boss_dead_sound.mp3");
   hurtInterval;
   dieInterval;
 
@@ -74,6 +75,7 @@ class Endboss extends MovableObject {
         if (this.deathAnimationComplete === false) {
           this.playAnimation(this.IMAGES_DEAD_BOSS); // Spiele Animation
           // Prüfe ob jetzt beim letzten Bild ist
+          this.dead_sound_boss.play();
           if (this.currentImage >= this.IMAGES_DEAD_BOSS.length) {
             this.deathAnimationComplete = true;
           }
@@ -81,6 +83,7 @@ class Endboss extends MovableObject {
       } else if (this.isHurt == true) {
         console.log("Boss is Hurt");
         this.playAnimation(this.IMAGES_HURT);
+        this.damage_sound_boss.play();
       } else this.playAnimation(this.IMAGES_BOSS_IDLE);
     }, 200);
   }
