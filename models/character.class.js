@@ -66,10 +66,11 @@ class Character extends MovableObject {
   idleInterval;
   idleTimer;
   animationIntervals;
+  deathAnimationComplete = false;
   walking_sound = new Audio("src/audio/step.mp3");
   jumping_sound = new Audio("src/audio/jump.mp3");
   idle_sound = new Audio("src/audio/idle.mp3");
-  damage_sound = new Audio("src/audio/char_dmg_sound.mp3");
+  dead_sound = new Audio("src/audio/char_dead.mp3");
   offset = {
     top: 70,
     left: 50,
@@ -128,11 +129,24 @@ class Character extends MovableObject {
 
     this.animationIntervals = setInterval(() => {
       if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD);
+        if (
+          this.deathAnimationComplete === false &&
+          this.currentImage < this.IMAGES_DEAD.length
+        ) {
+          this.playAnimation(this.IMAGES_DEAD);
+          this.dead_sound.play();
+
+          if (this.isDead() && this.currentImage >= this.IMAGES_DEAD.length) {
+            this.deathAnimationComplete = true;
+            clearInterval(this.animationIntervals);
+          }
+        }
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
+        this.resetIdleTimer();
       } else if (this.isAboveGround()) {
         this.playAnimation(this.IMAGES_JUMPING);
+        this.resetIdleTimer();
       } else if (this.world.keyboard.F) {
         this.playAnimation(this.IMAGES_CAST);
         this.resetIdleTimer();

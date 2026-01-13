@@ -25,7 +25,6 @@ class Goblin extends MovableObject {
     right: 70,
     bottom: 60,
   };
-
   isDead = false;
 
   constructor() {
