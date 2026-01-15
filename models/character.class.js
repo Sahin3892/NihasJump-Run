@@ -66,7 +66,6 @@ class Character extends MovableObject {
   idleInterval;
   idleTimer;
   animationIntervals;
-  deathAnimationComplete = false;
   walking_sound = new Audio("src/audio/step.mp3");
   jumping_sound = new Audio("src/audio/jump.mp3");
   idle_sound = new Audio("src/audio/idle.mp3");
@@ -123,24 +122,12 @@ class Character extends MovableObject {
         this.jumping_sound.play();
         this.resetIdleTimer();
       }
-
       this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
 
     this.animationIntervals = setInterval(() => {
       if (this.isDead()) {
-        if (
-          this.deathAnimationComplete === false &&
-          this.currentImage < this.IMAGES_DEAD.length
-        ) {
-          this.playAnimation(this.IMAGES_DEAD);
-          this.dead_sound.play();
-
-          if (this.isDead() && this.currentImage >= this.IMAGES_DEAD.length) {
-            this.deathAnimationComplete = true;
-            clearInterval(this.animationIntervals);
-          }
-        }
+        this.playAnimation(this.IMAGES_DEAD);
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
         this.resetIdleTimer();
