@@ -70,6 +70,8 @@ class Character extends MovableObject {
   jumping_sound = new Audio("src/audio/jump.mp3");
   idle_sound = new Audio("src/audio/idle.mp3");
   dead_sound = new Audio("src/audio/char_dead.mp3");
+  energy = 100;
+  lastHit = 0;
   offset = {
     top: 70,
     left: 50,
@@ -127,7 +129,7 @@ class Character extends MovableObject {
 
     this.animationIntervals = setInterval(() => {
       if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD);
+        this.CharDieAnimation();
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
         this.resetIdleTimer();
@@ -175,5 +177,38 @@ class Character extends MovableObject {
   soundSettings() {
     this.walking_sound.play();
     this.walking_sound.volume = 0.2;
+  }
+
+  hit() {
+    this.energy -= 5;
+    if (this.energy <= 0) {
+      this.energy = 0;
+    } else {
+      this.lastHit = new Date().getTime();
+    }
+  }
+
+  isHurt() {
+    let timepassed = new Date().getTime() - this.lastHit;
+    timepassed = timepassed / 1000;
+    return timepassed < 0.5;
+  }
+
+  isDead() {
+    return this.energy == 0;
+  }
+
+  CharDieAnimation() {
+    if (this.deathAnimationComplete === false) {
+      this.playAnimation(this.IMAGES_DEAD_BOSS); // Spiele Animation
+      // Prüfe ob jetzt beim letzten Bild ist
+      this.dead_sound_boss.play();
+      if (this.currentImage >= this.IMAGES_DEAD.length) {
+        this.deathAnimationComplete = true;
+      }
+    }
+    clearTimeout(this.idleTimer);
+    clearInterval(this.idleInterval);
+    console.log(this.currentImage);
   }
 }

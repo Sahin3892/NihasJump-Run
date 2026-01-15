@@ -72,14 +72,7 @@ class Endboss extends MovableObject {
     console.log("Neues Interval gestartet");
     setInterval(() => {
       if (this.isDead === true) {
-        if (this.deathAnimationComplete === false) {
-          this.playAnimation(this.IMAGES_DEAD_BOSS); // Spiele Animation
-          // Prüfe ob jetzt beim letzten Bild ist
-          this.dead_sound_boss.play();
-          if (this.currentImage >= this.IMAGES_DEAD_BOSS.length) {
-            this.deathAnimationComplete = true;
-          }
-        }
+        this.bossDieAnimation();
       } else if (this.isHurt == true) {
         console.log("Boss is Hurt");
         this.playAnimation(this.IMAGES_HURT);
@@ -92,5 +85,16 @@ class Endboss extends MovableObject {
     this.isDead = true;
     this.currentImage = 0;
     console.log("Boss is dead");
+  }
+
+  bossDieAnimation() {
+    if (this.deathAnimationComplete === false) {
+      this.playAnimation(this.IMAGES_DEAD_BOSS); // Spiele Animation
+      // Prüfe ob jetzt beim letzten Bild ist
+      this.dead_sound_boss.play();
+      if (this.currentImage >= this.IMAGES_DEAD_BOSS.length) {
+        this.deathAnimationComplete = true;
+      }
+    }
   }
 }

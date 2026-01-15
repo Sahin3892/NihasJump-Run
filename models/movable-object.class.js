@@ -9,8 +9,6 @@ class MovableObject extends DrawableObject {
     right: 0, // width
     bottom: 0, // height
   };
-  energy = 100;
-  lastHit = 0;
 
   applyGravity() {
     setInterval(() => {
@@ -36,25 +34,6 @@ class MovableObject extends DrawableObject {
       this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
       this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
     );
-  }
-
-  hit() {
-    this.energy -= 5;
-    if (this.energy <= 0) {
-      this.energy = 0;
-    } else {
-      this.lastHit = new Date().getTime();
-    }
-  }
-
-  isHurt() {
-    let timepassed = new Date().getTime() - this.lastHit;
-    timepassed = timepassed / 1000;
-    return timepassed < 0.5;
-  }
-
-  isDead() {
-    return this.energy == 0;
   }
 
   playAnimation(images) {
