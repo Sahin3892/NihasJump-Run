@@ -66,6 +66,8 @@ class Character extends MovableObject {
   idleInterval;
   idleTimer;
   animationIntervals;
+    deathAnimationComplete = false;
+  deathIndex = 0;
   walking_sound = new Audio("src/audio/step.mp3");
   jumping_sound = new Audio("src/audio/jump.mp3");
   idle_sound = new Audio("src/audio/idle.mp3");
@@ -200,9 +202,9 @@ class Character extends MovableObject {
 
   CharDieAnimation() {
     if (this.deathAnimationComplete === false) {
-      this.playAnimation(this.IMAGES_DEAD_BOSS); // Spiele Animation
+      this.playAnimation(this.IMAGES_DEAD); // Spiele Animation
       // Prüfe ob jetzt beim letzten Bild ist
-      this.dead_sound_boss.play();
+      this.dead_sound.play();
       if (this.currentImage >= this.IMAGES_DEAD.length) {
         this.deathAnimationComplete = true;
       }
