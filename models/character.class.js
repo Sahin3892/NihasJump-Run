@@ -66,7 +66,8 @@ class Character extends MovableObject {
   idleInterval;
   idleTimer;
   animationIntervals;
-  deathAnimationComplete = false;
+  deathAnimationInterval;
+  deathAnimationCompleteChar = false;
   deathIndex = 0;
   walking_sound = new Audio("src/audio/step.mp3");
   jumping_sound = new Audio("src/audio/jump.mp3");
@@ -83,7 +84,7 @@ class Character extends MovableObject {
 
   constructor() {
     super().loadImage(
-      "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/mage.png"
+      "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/mage.png",
     );
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_JUMPING);
@@ -131,6 +132,7 @@ class Character extends MovableObject {
 
     this.animationIntervals = setInterval(() => {
       if (this.isDead()) {
+        clearInterval(this.animationIntervals);
         this.CharDieAnimation();
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
@@ -146,7 +148,7 @@ class Character extends MovableObject {
           this.playAnimation(this.IMAGES_WALKING);
         } else if (!this.state) {
           this.loadImage(
-            "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/mage.png"
+            "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/mage.png",
           );
         }
       }
@@ -201,17 +203,20 @@ class Character extends MovableObject {
   }
 
   CharDieAnimation() {
-    if (this.deathAnimationComplete === false) {
-      this.playAnimation(this.IMAGES_DEAD); // Spiele Animation
-      // Prüfe ob jetzt beim letzten Bild ist
-      // this.dead_sound_boss.play();
-      this.deathIndex++;
-      if (this.deathIndex >= this.IMAGES_DEAD.length) {
-        this.deathAnimationComplete = true;
-        // Funktion clearAllInterval()
+    deathAnimationInterval = setInterval(() => {
+      if (this.deathAnimationCompleteChar === false) {
+        this.playAnimation(this.IMAGES_DEAD); // Spiele Animation
+        // Prüfe ob jetzt beim letzten Bild ist
+        this.dead_sound.play();
+        this.deathIndex++;
+        if (this.deathIndex >= this.IMAGES_DEAD.length) {
+          this.deathAnimationCompleteChar = true;
+          clearInterval(this.deathAnimationCompleteChar);
+          clearTimeout(this.idleTimer);
+          clearInterval(this.idleInterval);
+          // Funktion clearAllInterval()
+        }
       }
-    }
-    clearTimeout(this.idleTimer);
-    clearInterval(this.idleInterval);
+    }, 100);
   }
 }
