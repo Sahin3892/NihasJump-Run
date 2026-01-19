@@ -12,13 +12,14 @@ class Statusbarhealth extends DrawableObject {
     this.y = 27;
     this.height = 13;
     this.setPercentage(100);
+    this.muteDamgeSound();
   }
 
   setPercentage(percentage) {
     this.percentage = percentage;
     let path = this.IMAGE_HEALTH[this.resolveImageIndex()];
     this.img = this.imageCache[path];
-    this.damage_sound.play();
+    this.muteDamgeSound();
   }
 
   resolveImageIndex() {
@@ -30,5 +31,14 @@ class Statusbarhealth extends DrawableObject {
       this.width = 0; // Falls `this.percentage` außerhalb des Bereichs 0-100 liegt
     }
     return 0;
+  }
+
+  muteDamgeSound() {
+    if (this.percentage > 0) {
+      this.damage_sound.play();
+    } else {
+      this.damage_sound.pause();
+      this.damage_sound.currentTime = 0;
+    }
   }
 }

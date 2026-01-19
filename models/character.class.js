@@ -203,7 +203,7 @@ class Character extends MovableObject {
   }
 
   CharDieAnimation() {
-    deathAnimationInterval = setInterval(() => {
+    this.deathAnimationInterval = setInterval(() => {
       if (this.deathAnimationCompleteChar === false) {
         this.playAnimation(this.IMAGES_DEAD); // Spiele Animation
         // Prüfe ob jetzt beim letzten Bild ist
@@ -211,7 +211,6 @@ class Character extends MovableObject {
         this.deathIndex++;
         if (this.deathIndex >= this.IMAGES_DEAD.length) {
           this.deathAnimationCompleteChar = true;
-          clearInterval(this.deathAnimationCompleteChar);
           clearTimeout(this.idleTimer);
           clearInterval(this.idleInterval);
           // Funktion clearAllInterval()
@@ -220,25 +219,3 @@ class Character extends MovableObject {
     }, 100);
   }
 }
-
-
-
-// Florians Lösung vom LiveCall
-//  deathAnimationComplete = false;
-//  deathIndex = 0;
-// CharDieAnimation() {
-//    if (this.deathAnimationComplete === false) {
-//      
-//      this.playAnimation(this.IMAGES_DEAD); // Spiele Animation
-//      // Prüfe ob jetzt beim letzten Bild ist
-//      // this.dead_sound_boss.play();
-//      this.deathIndex++;
-//      if (this.deathIndex >= this.IMAGES_DEAD.length) {
-//        this.deathAnimationComplete = true;
-//        // Funktion clearAllInterval()        
-//      }
-//    }
-//    clearTimeout(this.idleTimer);
-//    clearInterval(this.idleInterval);
-//    console.log(this.currentImage);
-//  }
