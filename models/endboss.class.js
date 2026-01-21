@@ -29,6 +29,8 @@ class Endboss extends MovableObject {
   dead_sound_boss = new Audio("src/audio/boss_dead_sound.mp3");
   hurtInterval;
   dieInterval;
+  walkInterval = null;
+  animationInterval;
 
   // Define the offset for collision detection
 
@@ -41,7 +43,7 @@ class Endboss extends MovableObject {
 
   constructor() {
     super().loadImage(
-      "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png" // Überprüfe ob Idle notwendig ist
+      "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png", // Überprüfe ob Idle notwendig ist
     );
     this.loadImages(this.IMAGES_HURT); // Lade die Bilder mehrfach
     this.loadImages(this.IMAGES_DEAD_BOSS);
@@ -69,8 +71,9 @@ class Endboss extends MovableObject {
   }
 
   animate() {
+    clearInterval(this.animationInterval);
     console.log("Neues Interval gestartet");
-    setInterval(() => {
+    this.animationInterval = setInterval(() => {
       if (this.isDead === true) {
         this.bossDieAnimation();
       } else if (this.isHurt == true) {
@@ -78,6 +81,7 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_HURT);
         this.damage_sound_boss.play();
       } else this.playAnimation(this.IMAGES_BOSS_IDLE);
+          console.log("animateInterval",this.animationInterval);
     }, 200);
   }
 
