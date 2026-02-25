@@ -81,7 +81,7 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_HURT);
         this.damage_sound_boss.play();
       } else this.playAnimation(this.IMAGES_BOSS_IDLE);
-          console.log("animateInterval",this.animationInterval);
+      console.log("animateInterval", this.animationInterval);
     }, 200);
   }
 
