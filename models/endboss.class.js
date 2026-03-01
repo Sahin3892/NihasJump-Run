@@ -35,6 +35,15 @@ class Endboss extends MovableObject {
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Walk6.png",
   ];
 
+  IMAGES_BOSS_ANGER = [
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger1.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger2.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger3.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger4.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Anger5.png",
+  ];
+
+  hadFirstContact = false;
   damage_sound_boss = new Audio("src/audio/boss_hit_sound.mp3");
   dead_sound_boss = new Audio("src/audio/boss_dead_sound.mp3");
   hurtInterval;
@@ -58,7 +67,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_HURT); // Lade die Bilder mehrfach
     this.loadImages(this.IMAGES_DEAD_BOSS);
     this.loadImages(this.IMAGES_BOSS_IDLE);
-    this.x = 2350;
+    this.x = 2350; // x = 2350 Ausgangsposition
     this.animate();
   }
 
@@ -81,17 +90,25 @@ class Endboss extends MovableObject {
   }
 
   animate() {
+    let i = 0;
     clearInterval(this.animationInterval);
     console.log("Neues Interval gestartet");
     this.animationInterval = setInterval(() => {
-      if (this.isDead === true) {
+      if (i > 5) {
+        this.playAnimation(this.IMAGES_BOSS_ANGER);
+      } else if (this.isDead === true) {
         this.bossDieAnimation();
       } else if (this.isHurt == true) {
         console.log("Boss is Hurt");
         this.playAnimation(this.IMAGES_HURT);
         this.damage_sound_boss.play();
       } else this.playAnimation(this.IMAGES_BOSS_IDLE);
-     // console.log("animateInterval", this.animationInterval);
+      // console.log("animateInterval", this.animationInterval);
+      i++;
+      if (world.character.x > 2000 && !this.hadFirstContact) {
+        i = 0;
+        this.hadFirstContact = true;
+      }
     }, 200);
   }
 
