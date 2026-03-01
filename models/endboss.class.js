@@ -5,7 +5,7 @@ class Endboss extends MovableObject {
   health = 100; // Add a health property
   percentage = 100; // Add a percentage property
   isDead = false;
-  deathAnimationComplete = false; // Ist die Tod-Animation fertig?
+  deathAnimationComplete = false; // Ist die Tod-Animation Fertig ?
 
   IMAGES_HURT = [
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Hurt1.png",
@@ -25,6 +25,16 @@ class Endboss extends MovableObject {
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Idle2.png",
     "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Idle3.png",
   ];
+
+  IMAGES_BOSS_WALK = [
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Walk1.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Walk2.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Walk3.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Walk4.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Walk5.png",
+    "src/img/bosses-pixel-art-game-assets-pack/PNG/Boss3/Walk6.png",
+  ];
+
   damage_sound_boss = new Audio("src/audio/boss_hit_sound.mp3");
   dead_sound_boss = new Audio("src/audio/boss_dead_sound.mp3");
   hurtInterval;
@@ -81,7 +91,7 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_HURT);
         this.damage_sound_boss.play();
       } else this.playAnimation(this.IMAGES_BOSS_IDLE);
-      console.log("animateInterval", this.animationInterval);
+     // console.log("animateInterval", this.animationInterval);
     }, 200);
   }
 

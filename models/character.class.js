@@ -174,7 +174,7 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_IDLE);
       this.idle_sound.play();
       this.idle_sound.volume = 0.35;
-      console.log("idleAnimaton", this.idleInterval);
+      // console.log("idleAnimaton", this.idleInterval);
     }, 200);
   }
 
