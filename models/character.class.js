@@ -167,9 +167,11 @@ class Character extends MovableObject {
     clearTimeout(this.idleTimer);
     clearInterval(this.idleInterval);
     this.idleTimer = setTimeout(() => {
-      this.state = "idle";
-      this.playIdleAnimation();
-      console.log("idleTimer", this.idleTimer);
+      if (this.canMove) {
+        this.state = "idle";
+        this.playIdleAnimation();
+        console.log("idleTimer", this.idleTimer);
+      }
     }, 3000);
     this.state = false;
     this.idle_sound.pause();

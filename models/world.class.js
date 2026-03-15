@@ -36,12 +36,12 @@ class World {
   checkBossContact() {
     let boss = this.level.boss[0];
     if (this.character.x > 2210 && !boss.hadFirstContact) {
-        boss.hadFirstContact = true;
-        boss.i = 0;
-        this.character.canMove = false;
-        setTimeout(() => {
-          this.character.canMove = true;
-        }, 4000);
+      boss.hadFirstContact = true;
+      boss.i = 0;
+      this.character.canMove = false;
+      setTimeout(() => {
+        this.character.canMove = true;
+      }, 8000);
     }
   }
 
@@ -124,11 +124,12 @@ class World {
 
     this.addToMap(this.character);
     if (this.level.boss[0].hadFirstContact) {
+      this.addObjectsToMap(this.level.boss);
       this.addToMap(this.statusBarBoss);
     }
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.boss);
+
     this.addObjectsToMap(this.level.mana);
     this.addObjectsToMap(this.castingSpell);
 

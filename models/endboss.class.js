@@ -51,7 +51,7 @@ class Endboss extends MovableObject {
   dieInterval;
   walkInterval = null;
   animationInterval;
-
+  isMoving;
   // Define the offset for collision detection
 
   offset = {
@@ -69,7 +69,9 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD_BOSS);
     this.loadImages(this.IMAGES_BOSS_IDLE);
     this.loadImages(this.IMAGES_BOSS_ANGER);
-    this.x = 2350; // x = 2350 Ausgangsposition
+    this.loadImages(this.IMAGES_BOSS_WALK);
+    this.speed = 15;
+    this.x = 2800; // x = 2350 Ausgangsposition
     this.animate();
   }
 
@@ -99,6 +101,9 @@ class Endboss extends MovableObject {
       } else if (this.isHurt) {
         this.playAnimation(this.IMAGES_HURT);
         this.damage_sound_boss.play();
+      } else if (this.hadFirstContact && this.x > 2350) {
+        this.moveLeft();
+        this.playAnimation(this.IMAGES_BOSS_WALK);
       } else if (this.hadFirstContact && this.i < 20) {
         // Nutze das "i" der Klasse
         this.playAnimation(this.IMAGES_BOSS_ANGER);
