@@ -81,6 +81,7 @@ class Character extends MovableObject {
     right: 50,
     bottom: 15,
   };
+  canMove = true;
 
   constructor() {
     super().loadImage(
@@ -100,56 +101,63 @@ class Character extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {
-      if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-        this.moveRight();
-        this.otherDirection = false;
-        this.resetIdleTimer();
-        if (!this.isAboveGround()) {
-          this.soundSettings();
+    this.walkingAnimations = setInterval(() => {
+      if (this.canMove) {
+        if (
+          this.world.keyboard.RIGHT &&
+          this.x < this.world.level.level_end_x
+        ) {
+          this.moveRight();
+          this.otherDirection = false;
+          this.resetIdleTimer();
+          if (!this.isAboveGround()) {
+            this.soundSettings();
+            this.resetIdleTimer();
+          }
+        }
+        if (this.world.keyboard.LEFT && this.x > 0) {
+          this.moveLeft();
+          this.otherDirection = true;
+          this.resetIdleTimer();
+          if (!this.isAboveGround()) {
+            this.soundSettings();
+            this.resetIdleTimer();
+          }
+        }
+        if (
+          (this.world.keyboard.SPACE && !this.isAboveGround()) ||
+          (this.world.keyboard.UP && !this.isAboveGround())
+        ) {
+          this.jump();
+          this.jumping_sound.play();
           this.resetIdleTimer();
         }
+        this.world.camera_x = -this.x + 100;
       }
-      if (this.world.keyboard.LEFT && this.x > 0) {
-        this.moveLeft();
-        this.otherDirection = true;
-        this.resetIdleTimer();
-        if (!this.isAboveGround()) {
-          this.soundSettings();
-          this.resetIdleTimer();
-        }
-      }
-      if (
-        (this.world.keyboard.SPACE && !this.isAboveGround()) ||
-        (this.world.keyboard.UP && !this.isAboveGround())
-      ) {
-        this.jump();
-        this.jumping_sound.play();
-        this.resetIdleTimer();
-      }
-      this.world.camera_x = -this.x + 100;
     }, 1000 / 60);
 
     this.animationIntervals = setInterval(() => {
-      if (this.isDead()) {
-        clearInterval(this.animationIntervals);
-        this.CharDieAnimation();
-      } else if (this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT);
-        this.resetIdleTimer();
-      } else if (this.isAboveGround()) {
-        this.playAnimation(this.IMAGES_JUMPING);
-        this.resetIdleTimer();
-      } else if (this.world.keyboard.F) {
-        this.playAnimation(this.IMAGES_CAST);
-        this.resetIdleTimer();
-      } else {
-        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-          this.playAnimation(this.IMAGES_WALKING);
-        } else if (!this.state) {
-          this.loadImage(
-            "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/mage.png",
-          );
+      if (this.canMove) {
+        if (this.isDead()) {
+          clearInterval(this.animationIntervals);
+          this.CharDieAnimation();
+        } else if (this.isHurt()) {
+          this.playAnimation(this.IMAGES_HURT);
+          this.resetIdleTimer();
+        } else if (this.isAboveGround()) {
+          this.playAnimation(this.IMAGES_JUMPING);
+          this.resetIdleTimer();
+        } else if (this.world.keyboard.F) {
+          this.playAnimation(this.IMAGES_CAST);
+          this.resetIdleTimer();
+        } else {
+          if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            this.playAnimation(this.IMAGES_WALKING);
+          } else if (!this.state) {
+            this.loadImage(
+              "src/img/assassin-mage-viking-free-pixel-art-game-heroes/PNG/Mage/mage.png",
+            );
+          }
         }
       }
     }, 50);

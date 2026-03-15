@@ -44,6 +44,7 @@ class Endboss extends MovableObject {
   ];
 
   hadFirstContact = false;
+  i = 0;
   damage_sound_boss = new Audio("src/audio/boss_hit_sound.mp3");
   dead_sound_boss = new Audio("src/audio/boss_dead_sound.mp3");
   hurtInterval;
@@ -67,6 +68,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_HURT); // Lade die Bilder mehrfach
     this.loadImages(this.IMAGES_DEAD_BOSS);
     this.loadImages(this.IMAGES_BOSS_IDLE);
+    this.loadImages(this.IMAGES_BOSS_ANGER);
     this.x = 2350; // x = 2350 Ausgangsposition
     this.animate();
   }
@@ -91,15 +93,19 @@ class Endboss extends MovableObject {
 
   animate() {
     clearInterval(this.animationInterval);
-    console.log("Neues Interval gestartet");
     this.animationInterval = setInterval(() => {
-      if (this.isDead === true) {
+      if (this.isDead) {
         this.bossDieAnimation();
-      } else if (this.isHurt == true) {
-        console.log("Boss is Hurt");
+      } else if (this.isHurt) {
         this.playAnimation(this.IMAGES_HURT);
         this.damage_sound_boss.play();
-      } else this.playAnimation(this.IMAGES_BOSS_IDLE);
+      } else if (this.hadFirstContact && this.i < 20) {
+        // Nutze das "i" der Klasse
+        this.playAnimation(this.IMAGES_BOSS_ANGER);
+        this.i++; // Jetzt zählt er hoch
+      } else {
+        this.playAnimation(this.IMAGES_BOSS_IDLE);
+      }
     }, 200);
   }
 

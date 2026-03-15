@@ -29,7 +29,20 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkCastingObjects();
+      this.checkBossContact();
     }, 200);
+  }
+
+  checkBossContact() {
+    let boss = this.level.boss[0];
+    if (this.character.x > 2210 && !boss.hadFirstContact) {
+        boss.hadFirstContact = true;
+        boss.i = 0;
+        this.character.canMove = false;
+        setTimeout(() => {
+          this.character.canMove = true;
+        }, 4000);
+    }
   }
 
   checkCastingObjects() {
@@ -110,7 +123,9 @@ class World {
     this.ctx.translate(this.camera_x, 0); // Forward
 
     this.addToMap(this.character);
-    this.addToMap(this.statusBarBoss);
+    if (this.level.boss[0].hadFirstContact) {
+      this.addToMap(this.statusBarBoss);
+    }
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.boss);
