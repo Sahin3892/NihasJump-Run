@@ -37,7 +37,7 @@ class World {
       let spell = new CastingSpell(
         this.character.x,
         this.character.y,
-        this.character.otherDirection
+        this.character.otherDirection,
       );
       this.castingSpell.push(spell);
       this.statusBarMana.percentage -= 10; // Reduziert den Anteil um 10
@@ -89,7 +89,7 @@ class World {
     this.level.mana.splice(index, 1);
     this.statusBarMana.percentage = Math.min(
       this.statusBarMana.percentage + 20,
-      100
+      100,
     );
     this.statusBarMana.setPercentage(this.statusBarMana.percentage);
   }

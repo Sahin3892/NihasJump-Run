@@ -90,25 +90,16 @@ class Endboss extends MovableObject {
   }
 
   animate() {
-    let i = 0;
     clearInterval(this.animationInterval);
     console.log("Neues Interval gestartet");
     this.animationInterval = setInterval(() => {
-      if (i > 5) {
-        this.playAnimation(this.IMAGES_BOSS_ANGER);
-      } else if (this.isDead === true) {
+      if (this.isDead === true) {
         this.bossDieAnimation();
       } else if (this.isHurt == true) {
         console.log("Boss is Hurt");
         this.playAnimation(this.IMAGES_HURT);
         this.damage_sound_boss.play();
       } else this.playAnimation(this.IMAGES_BOSS_IDLE);
-      // console.log("animateInterval", this.animationInterval);
-      i++;
-      if (world.character.x > 2000 && !this.hadFirstContact) {
-        i = 0;
-        this.hadFirstContact = true;
-      }
     }, 200);
   }
 
@@ -125,6 +116,7 @@ class Endboss extends MovableObject {
       this.dead_sound_boss.play();
       if (this.currentImage >= this.IMAGES_DEAD_BOSS.length) {
         this.deathAnimationComplete = true;
+        clearInterval(this.animationInterval);
       }
     }
   }
